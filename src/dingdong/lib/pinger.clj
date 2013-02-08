@@ -4,7 +4,9 @@
 (defn ping-with-sleep [url]
   (loop []
     (let [wait-time (rand-int 200)]
-      (time (println (:status (client/get url))))
+      (time (println (:status (client/get url
+                                          {:socket-timeout 30000
+                                           :conn-timeout 30000}))))
       (Thread/sleep wait-time)
       (recur))))
 
